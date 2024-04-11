@@ -1,0 +1,14 @@
+/*
+ *		context-dialog-1.css    2024-04-10    usp
+ */
+
+.context-dialog {
+	visibility : hidden ;
+	position : absolute ;
+	background-color : white ;
+	border : 1px solid silver ;
+	margin : 0 ;
+	}
+ul.context-dialog {
+	padding-right : 20px ;
+	}

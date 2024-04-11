@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="template-info" file-name="empty.htm" version="2023-12-17" editor="USP" />
+<meta name="author" content="USP" />
+<meta name="creation-date" content="2014-04-10" />
+<meta name="editor" content="USP" />
+<meta name="change-date" content="2014-04-11" />
+<meta name="version" content="1" />
+<meta name="categories" content="Projects > Web Programming > Web Toolbox 2" />
+<meta name="tags" content="project, programming, web, toolbox, context, dialog" />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="all" />
+<link rel="stylesheet" href="/inc/page-2.css" />
+<link rel="stylesheet" href="/inc/context-dialog/context-dialog-1.css" />
+
+<meta name="description" content="The context-dialog package is a none-module script that provides basic functions for handling context dialogs in web pages." />
+
+<title>Web Toolbox 2 - Context Dialog</title>
+</head><body><header id="page-header"><object data="title.svg" type="image/svg+xml"></object></header><div id="main-toolbar"></div><main id="page-content">
+
+<h1>Context Dialog</h1>
+
+<p id="page-abstract"></p>
+
+<p>The functions are published in the <tt>Synesis.Page</tt> namepspace</p>
+
+<p>Example: <span id="e1" data-contextdialog-id="dialog-001"style="border:1px solid silver">This element</span> has a context dialog assigned. Right-click or long-tap on it to open its contex menu.</p>
+
+<h2 cbc>Overview</h2><div>
+
+<p>The page author creates a context dialog as HTML element and (optional) dialog open and close event handlers, then decorates HTML elements with a <tt>data-contextdialog-id</tt> attribute to associate a context dialog with an element.</p>
+
+<p>The context dialog element can be of any type. An <tt>UL</tt> element is a good start because it provides text and icon images out of the box.</p>
+
+<p>Usually a close event handler is written which evaluates the dialog state and takes appropriate actions. The event handlers and can prevent opening and closing. More details in the refrence section.</p>
+
+<!--h2--Overview--></div>
+
+<h2 cbc>Usage</h2><div>
+
+<p>1. Include the stylesheet document in the HEAD element:</p>
+<figcaption class="listing"></figcaption>
+<pre>&lt;link rel="stylesheet" href="/inc/context-dialog/context-dialog-1.css" /&gt;</pre>
+
+<p>2. Add the HTML code for the dialog at the end of the page. Make sure that the dialog has a unique ID and the classname contains the string "context-dialog":</p>
+<figcaption class="listing"></figcaption>
+<pre>
+&lt;ul id="<hi>dialog-001</hi>" class="<hi>context-dialog</hi>"&gt;
+&lt;li&gt;Entry 1&lt;/li&gt;
+&lt;li&gt;Entry 2&lt;/li&gt;
+&lt;li&gt;Entry 3&lt;/li&gt;
+&lt;li&gt;Entry 4&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<p>3. Associate the context dialog to existing HTML elements on the page: Add a <tt>data-contextdialog-id</tt> attribute and set the value to the dialog id as defined in the previous step:</p>
+<figcaption class="listing"></figcaption>
+<pre>&lt;span data-contextdialog-id="<hi>dialog-001</hi>"&gt;THIS ELEMENT&lt;/span&gt; has a context dialog associated</pre>
+
+<p>3. Add the <tt>context-dialog.js</tt> script at the bottom of the page.</p>
+<figcaption class="listing"></figcaption>
+<pre>&lt;script src="/inc/context-dialog/<hi>context-dialog-1.js</hi>"&lt;/script&gt;</pre>
+<p>This script injects the context dialog functions into the <tt>Synesis.Page</tt> namespace.</p>
+
+<p>5. Register the dialog in the context dialog registry:</p>
+<figcaption class="listing"></figcaption>
+<pre>
+&lt;script type="module"&gt;
+Synesis.Page.registerContextDialog ( "dialog-001", 
+	function( ){ console.log( "opening dialog" ) }, 
+	function( ){ console.log( "closing dialog" ) } 
+	);
+&lt;/script&gt;
+</pre>
+
+<p>Both function parameters are optional.</p>
+
+<!--h2--Usage--></div>
+
+<h2 cbc>Reference</h2><div>
+
+<h3 cbc>registerContextDialog( )</h3><div>
+
+<p>Parameters:</p>
+
+<dl>
+<dt>dialogid</dt><dd>
+	<p>The id of the HTML element that provides the context dialog.</p></dd>
+<dt>onopen=null</dt><dd>
+	<p>A optional function expression. The function is called before the dialog opens.</p>
+	<p>If the function returns <tt>false</tt>, the dialog will not be opened.</p>
+	<p>The function can be used to put the dialog in the desired state.</p>
+	<p>Parameters:</p>
+	<dl style="margin-top:0">
+	<dt>dialog</dt><dd>Reference to the context dialog</dd>
+	<dt>returns</dt><dd><tt>false</tt> to prevent the dialog from opening</dd>
+	</dl></dd>
+<dt>onclose=null</dt><dd>
+	<p>A optional function expression. The function is called before the dialog closes.</p>
+	<p>If the function returns <tt>false</tt>, the dialog will remain open.</p>
+	<p>The onclose function implementation usually inspects the dialog state and takes appropriate actions. Alternatively, the page author can decide to attach event handlers directly to the dialog elements and act on events as necessary.</p>
+	<p>Parameters:</p>
+	<dl style="margin-top:0">
+	<dt>dialog</dt><dd>Reference to the context dialog</dd>
+	<dt>returns</dt><dd><tt>false</tt> to prevent the dialog from closing</dd>
+	</dl>
+</dd>
+</dl>
+
+<!--h3--registerContextDialog( )--></div>
+
+<h3 cbc>Dialog Element Attributes</h3><div>
+
+<p>The HTML elements of a context dialog can carry attributes that influence behaviour.</p>
+
+<dl data-contextdialog-id-parent="dialog-002" >
+<dt></dt>
+</dl>
+
+<div 
+
+<!--h3--Dialog Element Attributes--></div>
+
+<h3 cbc>Data Structures</h3><div>
+
+<dl>
+<dt><tt>Synesis.Page.activeContextDialogDescriptor</tt></dt><dd>Points to the currently open dialog descriptor.</dd>
+<dt><tt>Synesis.Page.activeContextElement</tt></dt><dd>Points to the element on which the context dialog is shown.</dd>
+<dt><tt>	Synesis.Page.activeContextParent</tt></dt><dd>Points to the active context parent element if there is one.</dd>
+</dl>
+
+<!--h3--Data Structures--></div>
+
+<!--h2--Reference--></div>
+
+<h2 cbc>Advanced Scenarios</h2><div>
+
+<h3 cbc>Context Options Dialogs</h3><div>
+
+<p>Without further action, every click on any context dialog element closes the dialog. This is what the user expects from a context menu. But if you decorate one or more elements with the <tt>data-close-dialog</tt> attribute, a click on these elements only will close the context dialog. By using this feature, you can implement an options dialog, sort of, which requires a number of user interactions before the user submits the settings.</p>
+
+<!--h3--Context Options Dialogs--></div>
+
+<h3 cbc>Common Context Dialog ID Parent</h3><div>
+
+<p>The standard scenario defines a <tt>data-contextdialog-id</tt> attribute on every element that is associated with a context menu. To reduce writing effort, a common parent element can be decorated with the <tt>data-contextdialog-id-parent</tt> attribute instead, set to the ID of the associated context dialog. The advantage is that only a few elements must be decorated. The drawback is that the context event handler is fired for every element, whether they have an associated context dialog, or not. Therefore, the <tt>onopen</tt> event handler must sort that out and return <tt>false</tt> to prevent the dialog to be openend on unqualified elements.</p>
+
+<p>An example:</p>
+
+<figcaption class="listing">A common dialog id parent</figcaption>
+<pre>
+&lt;div data-contextdialog-id-parent="<hi>dialog-002</hi>"&gt;
+&lt;div&gt;&lt;input type="checkbox"&gt;test&lt;/div&gt;
+&lt;div&gt;&lt;input type="checkbox"&gt;test&lt;/div&gt;
+&lt;div&gt;&lt;input type="checkbox"&gt;test&lt;/div&gt;
+&lt;div&gt;&lt;input type="checkbox"&gt;test&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<p>The <tt>onopen</tt> event handler checks the event target:</p>
+
+<figcaption class="listing">On open event handler</figcaption>
+<pre>
+evt => {
+	<cc>//	Allow context dialog on input elements only.</cc>
+	if ( evt.target.tagName !== "INPUT" ) return false ;
+	}
+</pre>
+
+<p>The <tt>onclose</tt> event handler implements the functionality:</p>
+
+<figcaption class="listing">On close event handler</figcaption>
+<pre>
+evt => {
+	<cc>//	clear all input states</cc>
+	for ( const input of Synesis.Page.activeContextParent.querySelectorAll( "input" )) {
+		input.checked = false;
+	}	}
+</pre>
+
+<p>You can try that out live:</p>
+
+<div data-contextdialog-id-parent="dialog-002">
+<div><input type="checkbox">test</div>
+<div><input type="checkbox">test</div>
+<div><input type="checkbox">test</div>
+<div><input type="checkbox">test</div>
+</div>
+
+<p>Check some boxes, then right-click or long-tap one of the checkboxes. Click the <tt>clear</tt> command to reset all checkboxes.</p>
+
+<!--h3--Common Context Dialog ID Parent--></div>
+
+<!--h2--Advanced Scenarios--></div>
+
+<h2 cbc>Architectural Notes</h2><div>
+
+<p>The component stores data in the <tt>Synesis.Page</tt> namespace object with a global/page scope. This is okay because there can only be one context dialog open on a page.</p>
+
+<!--h2--Architectural Notes--></div>
+</main><footer id="page-footer"></footer>
+
+<ul id="dialog-001" class="context-dialog">
+<li>Entry 1</li>
+<li>Entry 2</li>
+<li>Entry 3</li>
+<li>Entry 4</li>
+</ul>
+
+<ul id="dialog-002" class="context-dialog">
+<li>Clear state</li>
+</ul>
+
+<script type="module" src="/inc/page.js" ></script>
+<script type="module" src="/inc/fragment-loader/simple-fragment-loader-2.js"></script>
+<xscript src="/inc/namespace/create-namespaces-1.js" namespaces="Page"></xscript>
+<script src="/inc/context-dialog/context-dialog-1.js" ></script>
+<script type="module">
+Synesis.Page.registerContextDialog ( "dialog-001", 
+	function( ){ console.log( "opening dialog" ) ; return true }, 
+	function( ){ console.log( "closing dialog" ) ; return true }
+	);
+Synesis.Page.registerContextDialog( "dialog-002", 
+	evt => {
+		//	Allow context dialog on input elements only.
+		if ( evt.target.tagName !== "INPUT" ) return false ;
+		} ,
+	evt => {
+		//	clear all input states
+		for ( const input of Synesis.Page.activeContextParent.querySelectorAll( "input" )) {
+			input.checked = false;
+			}
+		console.log( evt.target );
+		} ) ;
+</script>
+</body></html>
