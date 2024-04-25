@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="template-info" file-name="html-doc-page.htm" version="2023-12-17" editor="USP" />
+<meta name="author" content="USP" />
+<meta name="creation-date" content="2024-04-24" />
+<meta name="editor" content="USP" />
+<meta name="change-date" content="2024-04-24" />
+<meta name="version" content="1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="all" />
+<link rel="stylesheet" href="/inc/page-2.css" />
+<style>
+li > pre { padding-left : 0 }
+</style>
+
+<meta name="categories" content="Projects > Web Toolbox 2 > Collapsible Table" />
+<meta name="tags" content="programming, project, web toolbox 2, collapsible, table, row, column, visibility" />
+<meta name="description" content="The collapsible table component implements collapsible table row and columns. The CSS <tt>visibility:collapse</tt> style is used for that purpose." />
+
+<title>Web Toolbox 2 > Collapsible Table Rows and Columns</title>
+
+</head><body><header id="page-header"><object data="title.svg" type="image/svg+xml"></object></header><div id="main-toolbar"></div><main id="page-content">
+
+<h1>Collapsible Table Rows and Columns</h1>
+
+<p id="page-abstract"></p>
+
+<p>The table body height cannot be controlled with the style <tt>height</tt>, and fiddling around with the <tt>display</tt> style quickly leads to undesired side effects. Therefore the smooth height and width transition effects of the <tt>collapsible-structures</tt> component have been abandoned. The <tt>collapsible-table</tt> component is based on the <tt>visibility:collapse</tt> style, which works pretty well on table rows and columns.</p>
+
+<h2 cbc>Example</h2><div>
+
+<table class="flat-borders"></table>
+
+<p>Click on a rowgroup header (decorated with a circled plus or minus) to toggle the visibility of the row group. All rows except the first (the group controller row) are affected.</p>
+<p>Click on a column control header cell to toggle the visibility of a column. The entire column disappears, including the controller cell.</p>
+<p>Click on the first column control header cell in that row. It has a different control icon, because the first column cannot be hidden. Instead, a click overrides the visibility of all columns without changing their state. Collapsed columns are now visible and show a circled plus icon, like rows. Their state is now accessible and can be toggled. When done, click the first column control cell again to collapse the columns with a circled plus.</p>
+
+<!--h2--Example--></div>
+
+<h2 cbc>Usage</h2><div>
+
+<p>To use the <tt>collapsible-table</tt> component, follow these steps:</p>
+
+<ol class="instruction-list">
+<li><p>Download the files <tt>collapsible-table-1.js</tt> and <tt>collapsible-table-1.js</tt> from the corresponding <a href="https://github.com/bassmationcode/web-toolbox-2/code/collapsible-table/">web-toolbox-2</a> code subfolder on Github and store them in the include folder of your web project.</p></li>
+
+<li><p>Include the stylesheet in the HEAD section:</p>
+	<pre>&lt;link rel="stylesheet" href="/inc/collapsible-table/<hi>collapsible-table-1.css</hi>" /&gt;</pre></li>
+
+<li><p>Include the script at the bottom of the BODY:</p>
+	<pre>&lt;script type="module" src="/inc/collapsible-table/<hi>collapsible-table-1.js</hi>"&gt;&lt;/script&gt;</pre></li>
+
+<li><p>Create a collapsible row group in a table body element and decorate the <tt>TBODY</tt> with the <tt>collapsible</tt> class name:</p>
+	<pre>
+	&lt;tbody class="<hi>collapsible</hi>"&gt;
+	    &lt;tr class="row-header"&gt;&lt;th colspan="8"&gt;Package&lt;/th&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;QFN40&lt;/td&gt;&lt;td&gt;QFN48&lt;/td&gt;&ctdot;&lt;td&gt;PLCC68&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&ctdot;&lt;/td&gt;&lt;/tr&gt;
+	&lt;/tbody&gt;
+	</pre>
+	<p>The first row of the table body element is considered the row group header and will be decorated by CSS rules with circled symbols that indicated the row group state.</p></li>
+
+<li style="margin-top: 20px"><p>Create a <tt>COL</tt> element for every column in the table:</p>
+	<pre>
+	&lt;table&gt;
+	&lt;colgroup&gt;&lt;col/&gt;&lt;col/&gt;&ctdot;&lt;col/&gt;&lt;/colgroup&gt;
+	&ctdot;
+	&lt;/table&gt;
+	</pre>
+	<p>These elements control the visibility of table columns.</p></li>
+
+<li style="margin-top:20px"><p>Decorate a controller row with the <tt>column-controller</tt> classname, This is typically the first heading row in the table:</p>
+	<pre>
+	&lt;thead&gt;&lt;tr class="<hi>column-controller</hi>"&gt;
+		&lt;th&gt;...&lt;/th&gt;...&lt;th&gt;...&lt;/th&gt;
+	&lt;/tr&gt;&lt;/thead&gt;
+	</pre>
+	<p>This classname causes a CSS rule to decorate the cells with circular column control icons.</p></li>
+</ol>
+
+<!--h2--Usage--></div>
+
+</main><footer id="page-footer"></footer>
+<script type="module" src="/inc/page.js" ></script>
+</body></html>

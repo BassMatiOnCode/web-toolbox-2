@@ -1,0 +1,41 @@
+﻿/**
+ * @name - collapsible-table
+ * @version - 1
+ * @abstract - Collapsible table rows and columns are achieved with "visibility:collapse".
+ * @description - Documentation at {@link https://bassmationcode.github.io/web-toolbox-2/collabsile-table/collapsible-table.htm}.
+ */
+
+	/* * * Collapsible Rows * * */
+
+tbody.collapsible[data-collapsed] > tr {
+	visibility : collapse ;
+	}
+tbody.collapsible > tr.row-header {
+	visibility : visible ;
+	}
+tbody.collapsible > tr.row-header > th:before {
+	font-family : "sans serif" ;
+	color : #888 ;
+	content : "⊝ " ;
+	}
+tbody.collapsible[data-collapsed] > tr.row-header > th:before {
+	content : "⊕︀ " ;
+	}
+	
+	/* * * Collapsible Columns * * */
+
+table:not([columns-visible]) col[collapsed] { visibility : collapse }
+tr.column-controller > tr:before , tr.column-controller > th:before {
+	font-family : "sans serif" ;
+	color : #888 ;
+	content : "⊝ " ;
+	}
+tr.column-controller > td[collapsed]:before , tr.column-controller > th[collapsed]:before {
+	content : "⊕︀ " ;
+	}
+tr.column-controller > tr:before , tr.column-controller > th:first-child:before {
+	content : "⊙ " ;
+	}
+tr.column-controller > td[collapsed]:before , tr.column-controller > th[collapsed]:first-child:before {
+	content : "⊚ " ;
+	}
