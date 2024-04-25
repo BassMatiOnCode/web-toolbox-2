@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="template-info" file-name="empty.htm" version="2023-12-17" editor="USP" />
+<meta name="author" content="USP" />
+<meta name="creation-date" content="2014-04-09" />
+<meta name="editor" content="USP" />
+<meta name="change-date" content="2014-04-11" />
+<meta name="version" content="1" />
+<meta name="categories" content="Projects > Web Programming > Web Toolbox 2" />
+<meta name="tags" content="project, programming, web, toolbox, checkbox, instruction list" />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="all" />
+<link rel="stylesheet" href="/inc/page-2.css" />
+<link rel="stylesheet" href="/inc/checked-items/checked-items-1.css" />
+<link rel="stylesheet" href="/inc/context-dialog/context-dialog-1.css" />
+
+<style>
+dl.instruction-list > dd { margin-left : 0 }
+</style>
+
+<meta name="description" content="The checked-items component adds a checkbox element to list items. A typical application is the instruction list. A user can work through such a list and tick off the solved items. The state of the checkboxes is persisted in the local storage of the browser so if the user later returns back to the page, he can easily continue where he left off." />
+
+<title>Web Toolbox 2 - Checked Items</title>
+
+</head><body><header id="page-header"><object data="title.svg" type="image/svg+xml"></object></header><div id="main-toolbar"></div><main id="page-content">
+
+<h1>Checked Items</h1>
+
+<p id="page-abstract"></p>
+
+<p>Simply decorate a DL, UL or OL element with the attribute <tt>checked-items</tt>, the script component cares for the rest.</p>
+
+<p>Example:</p>
+
+<dl class="instruction-list checked-items"data-contextdialog-id="data-checkeditems-contextdialog" data-contextdialog-parent>
+<dt>Step 1</dt>
+<dt>Step 2</dt>
+<dt>Step 3</dt>
+<dt>Step 4</dt>
+</dl>
+
+<h2 cbc>Usage</h2><div>
+
+<p>To use this component, follow these steps:</p>
+
+<dl class="instruction-list checked-items" data-contextdialog-id="data-checkeditems-contextdialog" data-contextdialog-parent>
+
+<dt>1. Link the <tt>checked-items.css</tt> stylesheet to the document:</dt>
+<dd>
+<p>Add the following <tt>link</tt> element to the document <tt>head</tt>:</p>
+<figcaption class="listing">Linking the styesheet</figcaption>
+<pre>&lt;link rel="stylesheet" href="/inc/checked-items/<hi>checked-items-1.css</hi>" /&gt;</pre>
+</dd>
+
+<dt>2. Link the <tt>checked-items.js</tt> script to the document.</dt>
+<dd>
+<p>Add the following <tt>script</tt> element near the bottom of the page:</p>
+<figcaption class="listing">Linking the script</figcaption>
+<pre>&lt;script src="/inc/checked-items/<hi>checked-items-1.js</hi>" &gt;&lt;/script&gt;</pre>
+</dd>
+
+<dt>3. Decorate the list elements with this attribute:</dt>
+<dd>
+<figcaption class="listing">Adding the attribute</figcaption>
+<pre>
+&lt;dl class="<hi>checked-items</hi>"&gt;
+&lt;ul class="<hi>checked-items</hi>"&gt;
+&lt;ol class="<hi>checked-items</hi>"&gt;
+</pre>
+</dd>
+</dl>
+
+<p>The script generates input elements of type checkbox with unique storage keys, and adds change event handlers to persist the checkbox state in the browser's local storage.</p>
+
+<!--h2--Usage--></div>
+
+<h2 cbc>Implementation Details</h2><div>
+
+<p>The script implements an anonymous immediately called function, which encapsulates the entire functionality without polluting the global namespace. Implemented as a non-module script, no symbols are exported, but the script can be imported like any other module script.</p>
+
+<!--h2--Implementation Details--></div>
+
+</main><footer id="page-footer"></footer>
+
+<script type="module" src="/inc/page.js" ></script>
+<xscript type="module" src="/inc/fragment-loader/simple-fragment-loader-2.js"></xscript>
+<script src="/inc/context-dialog/context-dialog-1.js" ></script>
+<script src="/inc/checked-items/checked-items-1.js" ></script>
+</body></html>

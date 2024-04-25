@@ -1,0 +1,10 @@
+.checked-items > li > input:first-child {
+	margin-left : -10px ;
+	margin-right : 10px ;
+	}
+.checked-items > dd {
+	margin-left : 30px ;
+	}
+.checked-items > dt > input:first-child {
+	margin-right : 10px ;
+	}
